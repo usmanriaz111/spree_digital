@@ -8,10 +8,8 @@
   <% end %>
 
 <% else %>
-  <p><%= Spree.t('product.has_no_variants') %><p>
-
   <% if @product.master.digital? %>
-    A digital version of this product currently exists:
+    Currently attached Items:
     <%= render @product.master.digitals %>
   <% end %>
 

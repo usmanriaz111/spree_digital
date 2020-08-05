@@ -1,12 +1,13 @@
 <div>
   <%= form_for(:digital, :url => admin_product_digitals_path(@product), :method => :create, :multipart => true ) do |f| %>
     <fieldset>
-      <legend class='h4 pl-0 <%= variant.digital? ? "mb-0" : "mb-3" %>'><%= Spree::Variant.model_name.human %> "<%= variant.is_master ? "Master" : variant.options_text %>"</legend>
+      <legend class="h4 pl-0">Add Items</legend>
       <% if variant.digital? %>
         <table class="table">
           <thead>
             <tr>
               <th><%= Spree.t(:file_name, scope: "spree_digital") %></th>
+              <th>Item</th>
               <th class="actions"></th>
             </tr>
           </thead>
@@ -14,6 +15,7 @@
           <% variant.digitals.each do |digital| %>
             <tr>
               <td><%= render digital %></td>
+              <td><%= image_tag Rails.application.routes.url_helpers.rails_blob_path(digital.attachment, only_path: true), width: 30, height: 40 %></td>
               <td class="actions text-right">
                 <%= link_to_with_icon 'delete', Spree.t(:delete_file, scope: 'digitals'), admin_product_digital_url(@product, digital), data: {confirm: Spree.t(:delete_file_confirmation, scope: 'digitals', filename: digital.attachment_file_name)}, method: :delete, class: 'btn btn-danger btn-sm delete-resource' %>
               </td>
